@@ -27,7 +27,11 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         }
     }
 
-    public T[] toArray(){
-        
+    public void clear(){
+        @SuppressWarnings("unchecked")
+        T[] tBag = (T[]) new Object[hiddenSize];
+        bag = tBag;
+
+        size = 0;
     }
 }
