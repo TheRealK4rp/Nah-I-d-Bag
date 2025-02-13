@@ -1,2 +1,4 @@
-# Nah-I-d-Bag
-CS2400 Project 1
+Nah I'd Fail
+Colin Shiung, email, Quazaaar
+Joel Job Tsang, jjtsang@cpp.edu, TheRealK4rp
+
