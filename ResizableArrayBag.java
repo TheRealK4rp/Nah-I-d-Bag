@@ -17,6 +17,7 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
         return size;
     }
 
+    //fix later
     public boolean add(T item){
         isFull();
         bag[size] = item;
@@ -24,6 +25,7 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
         return true;
     }
 
+    //removes all of a certain item
     public boolean remove(T item){
         boolean removed = false;
         for(int i = 0;i < size;i++){
@@ -37,6 +39,7 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
         return removed;
     }
 
+    //removes all of a random item 
     public T remove(){
         T item = bag[(int) (Math.random()*size)];
         for(int i = 0;i < size;i++){
