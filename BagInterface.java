@@ -8,9 +8,8 @@ public abstract interface BagInterface<T>{
     public void clear();
     public int getFrequencyOf(T anItem);
     public boolean contains(T anItem);
-    public T[] toArray();
-
-    public BagInterface<T> union();
-    public BagInterface<T> intersection();
-    public BagInterface<T> difference();
+    
+    public BagInterface<T> union(BagInterface<T> other);
+    public BagInterface<T> intersection(BagInterface<T> other);
+    public BagInterface<T> difference(BagInterface<T> other);
 }
