@@ -17,7 +17,7 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
         return size;
     }
 
-    //fix later
+    //error handling needed for half these lol
     public boolean add(T item){
         isFull();
         bag[size] = item;
@@ -56,6 +56,7 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
         return size <= 0;
     }
 
+    // this should work.... just allocates more memory for the list // might be better to multiply the size but eh idk
     public void isFull(){
         if(size == hiddenSize){
             hiddenSize += 5;
@@ -66,9 +67,12 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
             for(int i = 0; i<size-1;i++){
                 tBag[i] = bag[i];
             }
+
+            bag = tBag;
         }
     }
 
+    // just fyi this can only return Object[] array
     public T[] toArray(){
         @SuppressWarnings("unchecked")
         T[] tBag = (T[]) new Object[size+1];
@@ -79,7 +83,7 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
     }
 
 
-
+    // everything below this comment is untested
     public void clear(){
         @SuppressWarnings("unchecked")
         T[] tBag = (T[]) new Object[hiddenSize];
