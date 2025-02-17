@@ -1,16 +1,65 @@
 public class BagDriver{
-    public static void main(String[] args){
-        LinkedBag<String> a = new LinkedBag<>();
-        //a.add("Yes");
-        a.add("no");
-        a.add("test");
-        ResizableArrayBag<String> b = new ResizableArrayBag<>();
-        b.add("Hi");
-        b.add("bye");
-        BagInterface<String> c = b.union(a);
-        System.out.println(c.size());
-        while(!c.isEmpty()){
-            System.out.println(c.remove());
+    public static void main(String[] args) {
+        useUnion();
+    }
+
+    public static void useUnion(){
+        BagInterface<Integer> linkedBag = new LinkedBag<>();
+        BagInterface<Integer> arrBag = new ResizableArrayBag<>();
+
+        linkedBag.add(1);
+        linkedBag.add(2);
+        linkedBag.add(3);
+
+        arrBag.add(3);
+        arrBag.add(4);
+        arrBag.add(5);
+
+        BagInterface<Integer> newBag = linkedBag.union(arrBag);
+        
+        while(!arrBag.isEmpty()){
+            System.out.println(arrBag.remove());
+        }
+
+    }
+
+    public static void useIntersection(){
+        BagInterface<Integer> linkedBag = new LinkedBag<>();
+        BagInterface<Integer> arrBag = new ResizableArrayBag<>();
+
+        linkedBag.add(1);
+        linkedBag.add(2);
+        linkedBag.add(3);
+
+        arrBag.add(3);
+        arrBag.add(4);
+        arrBag.add(5);
+
+        BagInterface<Integer> newBag = linkedBag.intersection(arrBag);
+
+        while(!newBag.isEmpty()){
+            System.out.println(newBag.remove());
+        }
+
+    }
+
+
+    public static void useDifference(){
+        BagInterface<Integer> linkedBag = new LinkedBag<>();
+        BagInterface<Integer> arrBag = new ResizableArrayBag<>();
+
+        linkedBag.add(1);
+        linkedBag.add(2);
+        linkedBag.add(3);
+
+        arrBag.add(3);
+        arrBag.add(4);
+        arrBag.add(5);
+
+        BagInterface<Integer> newBag = linkedBag.difference(arrBag);
+
+        while(!newBag.isEmpty()){
+            System.out.println(newBag.remove());
         }
     }
 }
