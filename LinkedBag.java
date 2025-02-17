@@ -166,5 +166,4 @@ public class LinkedBag<T> implements BagInterface<T>{
         }
         return newBag;
     }
->>>>>>> b6a4078911905bddb77a0ba79dfbcfcdc1032d28
 }
