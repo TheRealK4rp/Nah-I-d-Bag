@@ -1,3 +1,6 @@
+
+import java.util.HashMap;
+
 public class LinkedBag<T> implements BagInterface<T>{
     private Node<T> head;
 
@@ -151,10 +154,14 @@ public class LinkedBag<T> implements BagInterface<T>{
     @Override
     public BagInterface<T> intersection(BagInterface<T> other) {
         BagInterface<T> newBag = new LinkedBag<>();
+        HashMap<T, Integer> map = new HashMap<>();
         Node<T> temp = head;
+        
         while(temp != null){
-            if(other.contains(temp.data)){
+            map.putIfAbsent(temp.data, other.getFrequencyOf(temp.data));
+            if(map.get(temp.data) >= 1){
                 newBag.add(temp.data);
+                map.put(temp.data, map.getOrDefault(temp.data, 1) -1);
             }
             temp = temp.next;
         }
@@ -165,12 +172,15 @@ public class LinkedBag<T> implements BagInterface<T>{
     @Override
     public BagInterface<T> difference(BagInterface<T> other) {
         BagInterface<T> newBag = new LinkedBag<>();
+        HashMap<T, Integer> map = new HashMap<>();
         Node<T> temp = head;
 
         while(temp != null){
-            if(!other.contains(temp.data)){
+            map.putIfAbsent(temp.data, other.getFrequencyOf(temp.data));
+            if(map.get(temp.data) < 1){
                 newBag.add(temp.data);
             }
+            map.put(temp.data, map.getOrDefault(temp.data, 1) -1);
             temp = temp.next;
         }
         return newBag;

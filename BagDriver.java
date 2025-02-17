@@ -1,6 +1,6 @@
 public class BagDriver{
     public static void main(String[] args) {
-        useDifference();
+        useUnion();
     }
 
     public static void useUnion(){
@@ -16,9 +16,9 @@ public class BagDriver{
         arrBag.add(5);
 
         BagInterface<Integer> newBag = linkedBag.union(arrBag);
-
-        while(!newBag.isEmpty()){
-            System.out.println(newBag.remove());
+        
+        while(!arrBag.isEmpty()){
+            System.out.println(arrBag.remove());
         }
 
     }
