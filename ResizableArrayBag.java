@@ -1,4 +1,4 @@
-public class ResizableArrayBag<T> implements BagInterface<T>{// implements BagInterface<T>{
+public class ResizableArrayBag<T>{// implements BagInterface<T>{
 
     private int size;
     private T[] bag;
@@ -13,13 +13,11 @@ public class ResizableArrayBag<T> implements BagInterface<T>{// implements BagIn
         bag = tBag;
     }
 
-    @Override
     public int size(){
         return size;
     }
 
     //error handling needed for half these lol
-    @Override
     public boolean add(T item){
         isFull();
         bag[size] = item;
@@ -28,7 +26,6 @@ public class ResizableArrayBag<T> implements BagInterface<T>{// implements BagIn
     }
 
     //removes all of a certain item
-    @Override
     public boolean remove(T item){
         boolean removed = false;
         for(int i = 0;i < size;i++){
@@ -42,8 +39,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{// implements BagIn
         return removed;
     }
 
-    //removes all of a random item
-    @Override
+    //removes all of a random item 
     public T remove(){
         T item = bag[(int) (Math.random()*size)];
         for(int i = 0;i < size;i++){
@@ -56,7 +52,6 @@ public class ResizableArrayBag<T> implements BagInterface<T>{// implements BagIn
         return item;
     }
 
-    @Override
     public boolean isEmpty(){
         return size <= 0;
     }
@@ -89,7 +84,6 @@ public class ResizableArrayBag<T> implements BagInterface<T>{// implements BagIn
 
 
     // everything below this comment is untested
-    @Override
     public void clear(){
         @SuppressWarnings("unchecked")
         T[] tBag = (T[]) new Object[hiddenSize];
@@ -98,7 +92,6 @@ public class ResizableArrayBag<T> implements BagInterface<T>{// implements BagIn
         size = 0;
     }
 
-    @Override
     public int getFrequencyOf(T item){
         int count = 0;
         for(int i = 0;i < size;i++){
@@ -109,7 +102,6 @@ public class ResizableArrayBag<T> implements BagInterface<T>{// implements BagIn
         return count;
     }
 
-    @Override
     public boolean contains(T item){
         for(int i = 0;i < size;i++){
             if(item.equals(bag[i])){
@@ -117,24 +109,6 @@ public class ResizableArrayBag<T> implements BagInterface<T>{// implements BagIn
             }
         }
         return false;
-    }
-
-    @Override
-    public BagInterface<T> union(BagInterface<T> other) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'union'");
-    }
-
-    @Override
-    public BagInterface<T> intersection(BagInterface<T> other) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'intersection'");
-    }
-
-    @Override
-    public BagInterface<T> difference(BagInterface<T> other) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'difference'");
     }
 
 }
