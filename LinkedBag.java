@@ -125,6 +125,8 @@ public class LinkedBag<T> implements BagInterface<T>{
     @Override
     public BagInterface<T> union(BagInterface<T> other) {
         BagInterface<T> newBag = new LinkedBag<>();
+        BagInterface<T> newOther = new LinkedBag<>();
+
         Node<T> temp = head;
         while(temp != null){
             newBag.add(temp.data);
@@ -132,8 +134,15 @@ public class LinkedBag<T> implements BagInterface<T>{
         }
 
         while(!other.isEmpty()){
-            newBag.add(other.remove());
+            T data = other.remove();
+            newOther.add(data);
+            newBag.add(data);
         }
+
+        while(!newOther.isEmpty()){
+            other.add(newOther.remove());
+        }
+
         return newBag;
     }
 
