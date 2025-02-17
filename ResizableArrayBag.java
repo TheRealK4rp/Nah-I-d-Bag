@@ -1,17 +1,12 @@
-public class ResizableArrayBag<T>{// implements BagInterface<T>{
+public class ResizableArrayBag<T> implements BagInterface<T>{// implements BagInterface<T>{
 
     private int size;
     private T[] bag;
     private int hiddenSize;
-    public static final int DEFAULT_RESIZABLE_ARRAY_BAG_SIZE = 5;
 
     public ResizableArrayBag() {
-        this(DEFAULT_RESIZABLE_ARRAY_BAG_SIZE);
-    }
-
-    public ResizableArrayBag(int s) {
         size = 0;
-        hiddenSize = s;
+        hiddenSize = 5;
 
         @SuppressWarnings("unchecked")
         T[] tBag = (T[]) new Object[hiddenSize];
@@ -33,24 +28,31 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
     }
 
     //removes all of a certain item
+    @Override
     public boolean remove(T item){
         boolean removed = false;
         for(int i = 0;i < size;i++){
             if(item.equals(bag[i])){
                 bag[i] = bag[size-1];
+                size--;
+                i--;
                 removed = true;
-                break;
             }
         }
         return removed;
     }
 
-    //removes all of a random item 
+    //removes all of a random item
+    @Override
     public T remove(){
-        int index = (int) (Math.random()*size);
-        T item = bag[index];
-        bag[index] = bag[size-1];
-        size--;
+        T item = bag[(int) (Math.random()*size)];
+        for(int i = 0;i < size;i++){
+            if(item.equals(bag[i])){
+                bag[i] = bag[size-1];
+                size--;
+                i--;
+            }
+        }
         return item;
     }
 
@@ -115,6 +117,24 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
             }
         }
         return false;
+    }
+
+    @Override
+    public BagInterface<T> union(BagInterface<T> other) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'union'");
+    }
+
+    @Override
+    public BagInterface<T> intersection(BagInterface<T> other) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'intersection'");
+    }
+
+    @Override
+    public BagInterface<T> difference(BagInterface<T> other) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'difference'");
     }
 
 }

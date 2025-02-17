@@ -61,5 +61,6 @@ public class BagDriver{
         while(!newBag.isEmpty()){
             System.out.println(newBag.remove());
         }
+
     }
 }
