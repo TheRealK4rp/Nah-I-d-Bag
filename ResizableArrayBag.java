@@ -24,7 +24,6 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
 
     //error handling needed for half these lol
     public boolean add(T item){
-        if(isEmpty()) throw new NullPointerException("Bag Empty");
         isFull();
         bag[size] = item;
         size++;
@@ -46,7 +45,9 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     }
 
     //removes one random item
+    // something
     public T remove(){
+        if(isEmpty()) throw new NullPointerException("Bag Empty");
         int index = (int) (Math.random()*size);
         T item = bag[index];
         bag[index] = bag[size-1];
