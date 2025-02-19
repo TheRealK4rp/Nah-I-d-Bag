@@ -59,7 +59,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     // this should work.... just allocates more memory for the list // might be better to multiply the size but eh idk
     public void isFull(){
         if(size == hiddenSize){
-            hiddenSize += 5;
+            hiddenSize *= 2;
 
             @SuppressWarnings("unchecked")
             T[] tBag = (T[]) new Object[hiddenSize];
