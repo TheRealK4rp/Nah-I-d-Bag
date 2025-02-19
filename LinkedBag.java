@@ -1,4 +1,3 @@
-
 import java.util.HashMap;
 
 public class LinkedBag<T> implements BagInterface<T>{
@@ -10,7 +9,7 @@ public class LinkedBag<T> implements BagInterface<T>{
     public LinkedBag(T first){
         head = new Node<>(first);
     }
-
+    
     @Override
     public boolean add(T item){
         Node<T> node = new Node<>(item);
