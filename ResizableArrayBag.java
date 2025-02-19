@@ -48,9 +48,8 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     // something
     public T remove(){
         if(isEmpty()) throw new NullPointerException("Bag Empty");
-        int index = (int) (Math.random()*size);
-        T item = bag[index];
-        bag[index] = bag[size-1];
+        T item = bag[size-1];
+        bag[size-1] = null;
         size--;
         return item;
     }
