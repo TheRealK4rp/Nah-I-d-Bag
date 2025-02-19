@@ -17,8 +17,8 @@ public class BagDriver{
 
         BagInterface<Integer> newBag = linkedBag.union(arrBag);
         
-        while(!arrBag.isEmpty()){
-            System.out.println(arrBag.remove());
+        while(!newBag.isEmpty()){
+            System.out.println(newBag.remove());
         }
 
     }
