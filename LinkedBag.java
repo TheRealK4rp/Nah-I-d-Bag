@@ -15,6 +15,9 @@ public class LinkedBag<T> implements BagInterface<T>{
     @Override
     public boolean add(T item){
         Node<T> node = new Node<>(item);
+        node.next = head;
+        head = node;
+        /*
         if(isEmpty()){
             head = node;
         }else{
@@ -23,7 +26,7 @@ public class LinkedBag<T> implements BagInterface<T>{
                 temp = temp.next;
             }
             temp.next = node;
-        }
+        } */
         bagSize++;
         return true;
     }
