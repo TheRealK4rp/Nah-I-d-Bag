@@ -2,12 +2,14 @@ import java.util.HashMap;
 
 public class LinkedBag<T> implements BagInterface<T>{
     private Node<T> head;
+    private int bagSize = 0;
 
     public LinkedBag(){
     }
     
     public LinkedBag(T first){
         head = new Node<>(first);
+        bagSize++;
     }
     
     @Override
@@ -22,6 +24,7 @@ public class LinkedBag<T> implements BagInterface<T>{
             }
             temp.next = node;
         }
+        bagSize++;
         return true;
     }
 
@@ -52,13 +55,7 @@ public class LinkedBag<T> implements BagInterface<T>{
 
     @Override
     public int size() {
-        Node<T> temp = head;
-        int result = 0;
-        while(temp != null){
-            temp = temp.next;
-            result++;
-        }
-        return result;
+        return bagSize;
     }
 
     @Override
@@ -68,8 +65,10 @@ public class LinkedBag<T> implements BagInterface<T>{
 
     @Override
     public T remove() {
+        if(isEmpty()) throw new NullPointerException("Empty Bag");
         T tempData = head.data;
         head = head.next;
+        bagSize--;
         return tempData;
     }
 
@@ -84,6 +83,7 @@ public class LinkedBag<T> implements BagInterface<T>{
         while(save != null){
             if(save.data == anItem){
                 temp.next = save.next;
+                bagSize--;
                 return true;
             }else{
                 temp = save;
@@ -96,6 +96,7 @@ public class LinkedBag<T> implements BagInterface<T>{
     @Override
     public void clear() {
         head = null;
+        bagSize = 0;
     }
 
     @Override
