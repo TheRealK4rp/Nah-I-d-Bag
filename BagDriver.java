@@ -74,7 +74,7 @@ public class BagDriver{
 
     }
 
-    //arraybag intersect linkedbag
+    //arraybag interect linkedbag
     public static void useIntersection2(){
         BagInterface<Integer> linkedBag = new LinkedBag<>();
         BagInterface<Integer> arrBag = new ResizableArrayBag<>();
