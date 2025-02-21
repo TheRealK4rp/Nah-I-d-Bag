@@ -17,16 +17,6 @@ public class LinkedBag<T> implements BagInterface<T>{
         Node<T> node = new Node<>(item);
         node.next = head;
         head = node;
-        /*
-        if(isEmpty()){
-            head = node;
-        }else{
-            Node<T> temp = head;
-            while(temp.next != null){
-                temp = temp.next;
-            }
-            temp.next = node;
-        } */
         bagSize++;
         return true;
     }
