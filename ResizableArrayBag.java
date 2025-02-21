@@ -1,12 +1,17 @@
-public class ResizableArrayBag<T>{// implements BagInterface<T>{
+public class ResizableArrayBag<T> implements BagInterface<T>{
 
     private int size;
     private T[] bag;
     private int hiddenSize;
+    public static final int DEFAULT_RESIZABLE_ARRAY_BAG_SIZE = 5;
 
     public ResizableArrayBag() {
+        this(DEFAULT_RESIZABLE_ARRAY_BAG_SIZE);
+    }
+
+    public ResizableArrayBag(int s) {
         size = 0;
-        hiddenSize = 5;
+        hiddenSize = s;
 
         @SuppressWarnings("unchecked")
         T[] tBag = (T[]) new Object[hiddenSize];
@@ -25,30 +30,27 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
         return true;
     }
 
-    //removes all of a certain item
+    //removes one of a certain item
     public boolean remove(T item){
         boolean removed = false;
         for(int i = 0;i < size;i++){
             if(item.equals(bag[i])){
                 bag[i] = bag[size-1];
-                size--;
-                i--;
                 removed = true;
+                size--;
+                break;
             }
         }
         return removed;
     }
 
-    //removes all of a random item 
+    //removes one random item
+    // something
     public T remove(){
-        T item = bag[(int) (Math.random()*size)];
-        for(int i = 0;i < size;i++){
-            if(item.equals(bag[i])){
-                bag[i] = bag[size-1];
-                size--;
-                i--;
-            }
-        }
+        if(isEmpty()) throw new NullPointerException("Bag Empty");
+        T item = bag[size-1];
+        bag[size-1] = null;
+        size--;
         return item;
     }
 
@@ -59,7 +61,7 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
     // this should work.... just allocates more memory for the list // might be better to multiply the size but eh idk
     public void isFull(){
         if(size == hiddenSize){
-            hiddenSize += 5;
+            hiddenSize *= 2;
 
             @SuppressWarnings("unchecked")
             T[] tBag = (T[]) new Object[hiddenSize];
@@ -109,6 +111,64 @@ public class ResizableArrayBag<T>{// implements BagInterface<T>{
             }
         }
         return false;
+    }
+
+    
+    public BagInterface<T> union(BagInterface<T> otherBag){
+        BagInterface<T> unionBag = new ResizableArrayBag<>(otherBag.size() + size);
+        BagInterface<T> newOther = new ResizableArrayBag<>(otherBag.size());
+
+        for(int i = 0; i<size;i++){
+            unionBag.add(bag[i]);
+        }
+        for(int i = 0;i<otherBag.size();i++){
+            T item = otherBag.remove();
+            newOther.add(item);
+            unionBag.add(item);
+        }
+        while(!newOther.isEmpty()){
+            otherBag.add(newOther.remove());
+        }
+        return unionBag;
+    }
+
+    public BagInterface<T> intersection(BagInterface<T> otherBag){
+        BagInterface<T> intersectionBag = new ResizableArrayBag<>(otherBag.size() + size);
+        BagInterface<T> newOther = new ResizableArrayBag<>(otherBag.size());
+
+        for(T item: bag){
+            for(int i = 0; i<otherBag.getFrequencyOf(item);i++){
+                intersectionBag.add(item);
+                newOther.add(item);
+                otherBag.remove(item);
+            }
+        }
+
+        while(!newOther.isEmpty()){
+            otherBag.add(newOther.remove());
+        }
+        return intersectionBag;
+
+    }
+
+    public BagInterface<T> difference(BagInterface<T> otherBag){
+        BagInterface<T> differenceBag = new ResizableArrayBag<>(otherBag.size() + size);
+        BagInterface<T> newOther = new ResizableArrayBag<>(otherBag.size());
+
+        for(T item: bag){
+            if(this.getFrequencyOf(item) > otherBag.getFrequencyOf(item)){
+                for(int i = 0; i <this.getFrequencyOf(item) - otherBag.getFrequencyOf(item);i++){
+                    differenceBag.add(item);
+                    newOther.add(item);
+                    otherBag.remove(item);
+                }
+            }
+        }
+        while(!newOther.isEmpty()){
+            otherBag.add(newOther.remove());
+        }
+        return differenceBag;
+
     }
 
 }
