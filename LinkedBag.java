@@ -77,6 +77,10 @@ public class LinkedBag<T> implements BagInterface<T>{
 
     @Override
     public boolean remove(T anItem) {
+        if(head == null){
+            return false;
+        }
+
         if(head.data == anItem){
             head = head.next;
             return true;
@@ -153,7 +157,7 @@ public class LinkedBag<T> implements BagInterface<T>{
     }
 
 
-    //time complexity: O(n^2), for every item in the first bag they have to go through every item in the second bag and match, therefore O(n^2)
+    //time complexity: O(n^2), for every item in the bag they count how many are in it. Because .getFrequency is O(n) itself, this has to go through every item, therefore O(n^2)
     @Override
     public BagInterface<T> intersection(BagInterface<T> other) {
         BagInterface<T> newBag = new LinkedBag<>();
@@ -171,7 +175,7 @@ public class LinkedBag<T> implements BagInterface<T>{
         return newBag;
     }
 
-    //Time complexity: O(n^2) because we need to only add items that are not in bag 2, so for every item in bag 1, we check if bag 2 has it, if not we add. 
+    //time complexity: O(n^2), for every item in the bag they count how many are in it. Because .getFrequency is O(n) itself, this has to go through every item, therefore O(n^2)
     @Override
     public BagInterface<T> difference(BagInterface<T> other) {
         BagInterface<T> newBag = new LinkedBag<>();

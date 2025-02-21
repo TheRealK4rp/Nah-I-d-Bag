@@ -1,8 +1,9 @@
 public class BagDriver{
     public static void main(String[] args) {
-        useUnion();
+        useDifference2();
     }
 
+    //linkedBag union arraybag
     public static void useUnion(){
         BagInterface<Integer> linkedBag = new LinkedBag<>();
         BagInterface<Integer> arrBag = new ResizableArrayBag<>();
@@ -20,9 +21,29 @@ public class BagDriver{
         while(!newBag.isEmpty()){
             System.out.println(newBag.remove());
         }
-
     }
 
+    //arraybag union linkedbag
+    public static void useUnion2(){
+        BagInterface<Integer> linkedBag = new LinkedBag<>();
+        BagInterface<Integer> arrBag = new ResizableArrayBag<>();
+
+        linkedBag.add(1);
+        linkedBag.add(2);
+        linkedBag.add(3);
+
+        arrBag.add(3);
+        arrBag.add(4);
+        arrBag.add(5);
+
+        BagInterface<Integer> newBag = arrBag.union(linkedBag);
+        
+        while(!newBag.isEmpty()){
+            System.out.println(newBag.remove());
+        }
+    }
+
+    //linkedbag intercect arraybag
     public static void useIntersection(){
         BagInterface<Integer> linkedBag = new LinkedBag<>();
         BagInterface<Integer> arrBag = new ResizableArrayBag<>();
@@ -43,7 +64,28 @@ public class BagDriver{
 
     }
 
+    //arraybag intercect linkedbag
+    public static void useIntersection2(){
+        BagInterface<Integer> linkedBag = new LinkedBag<>();
+        BagInterface<Integer> arrBag = new ResizableArrayBag<>();
 
+        linkedBag.add(1);
+        linkedBag.add(2);
+        linkedBag.add(3);
+
+        arrBag.add(3);
+        arrBag.add(4);
+        arrBag.add(5);
+
+        BagInterface<Integer> newBag = arrBag.intersection(linkedBag);
+
+        while(!newBag.isEmpty()){
+            System.out.println(newBag.remove());
+        }
+
+    }
+
+    //linkedbag difference arrbag
     public static void useDifference(){
         BagInterface<Integer> linkedBag = new LinkedBag<>();
         BagInterface<Integer> arrBag = new ResizableArrayBag<>();
@@ -57,6 +99,27 @@ public class BagDriver{
         arrBag.add(5);
 
         BagInterface<Integer> newBag = linkedBag.difference(arrBag);
+
+        while(!newBag.isEmpty()){
+            System.out.println(newBag.remove());
+        }
+
+    }
+
+    //arraybag difference linkedbag
+    public static void useDifference2(){
+        BagInterface<Integer> linkedBag = new LinkedBag<>();
+        BagInterface<Integer> arrBag = new ResizableArrayBag<>();
+
+        linkedBag.add(1);
+        linkedBag.add(2);
+        linkedBag.add(3);
+
+        arrBag.add(3);
+        arrBag.add(4);
+        arrBag.add(5);
+
+        BagInterface<Integer> newBag = arrBag.difference(linkedBag);
 
         while(!newBag.isEmpty()){
             System.out.println(newBag.remove());

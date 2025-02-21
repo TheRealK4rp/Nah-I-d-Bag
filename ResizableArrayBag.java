@@ -77,7 +77,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     // just fyi this can only return Object[] array
     public T[] toArray(){
         @SuppressWarnings("unchecked")
-        T[] tBag = (T[]) new Object[size+1];
+        T[] tBag = (T[]) new Object[size];
         for(int i = 0; i<size;i++){
             tBag[i] = bag[i];
         }
@@ -97,7 +97,7 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
     public int getFrequencyOf(T item){
         int count = 0;
         for(int i = 0;i < size;i++){
-            if(item.equals(bag[i])){
+            if(item == bag[i]){
                 count++;
             }
         }
@@ -106,14 +106,14 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
 
     public boolean contains(T item){
         for(int i = 0;i < size;i++){
-            if(item.equals(bag[i])){
+            if(item == bag[i]){
                 return true;
             }
         }
         return false;
     }
 
-    
+    //Time complexity is O(n) as add and remove happen in O(1) time and this program loops through linearly. 
     public BagInterface<T> union(BagInterface<T> otherBag){
         BagInterface<T> unionBag = new ResizableArrayBag<>(otherBag.size() + size);
         BagInterface<T> newOther = new ResizableArrayBag<>(otherBag.size());
@@ -121,7 +121,8 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         for(int i = 0; i<size;i++){
             unionBag.add(bag[i]);
         }
-        for(int i = 0;i<otherBag.size();i++){
+        int otherBagSize = otherBag.size();
+        for(int i = 0;i<otherBagSize;i++){
             T item = otherBag.remove();
             newOther.add(item);
             unionBag.add(item);
@@ -132,6 +133,8 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
         return unionBag;
     }
 
+    //Time complexity is O(n^2) as it will have to go through each item in the bag and then search the entire bag for the frequency of said item. 
+    //Since .getFrequencyOf() is in O(n), this function is O(n^2) 
     public BagInterface<T> intersection(BagInterface<T> otherBag){
         BagInterface<T> intersectionBag = new ResizableArrayBag<>(otherBag.size() + size);
         BagInterface<T> newOther = new ResizableArrayBag<>(otherBag.size());
@@ -151,6 +154,8 @@ public class ResizableArrayBag<T> implements BagInterface<T>{
 
     }
 
+    //Time complexity is O(n^2) as it will have to go through each item in the bag and then search the entire bag for the frequency of said item. 
+    //Since .getFrequencyOf() is in O(n), this function is O(n^2)
     public BagInterface<T> difference(BagInterface<T> otherBag){
         BagInterface<T> differenceBag = new ResizableArrayBag<>(otherBag.size() + size);
         BagInterface<T> newOther = new ResizableArrayBag<>(otherBag.size());

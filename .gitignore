@@ -1,2 +1,7 @@
 #.class java ignore
 *.class
+
+.idea
+Nah-I-d-Bag.iml
+out
+lib
